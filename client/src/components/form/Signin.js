@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useMutation } from "react-query";
 import { Form, Button } from "react-bootstrap";
 import { API, setAuthToken } from "../../config/api";
 
@@ -14,19 +15,28 @@ const Signin = ({ handleSignin }) => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const loginUser = useMutation(
+    async () => {
+      const config = {
+        "Content-Type": "application/json",
+      };
+      return await API.post("/login", JSON.stringify(data), config);
+    },
+    {
+      onSuccess: async ({ data }) => {
+        setAuthToken(data.data.token);
+        handleSignin({
+          type: "LOGIN",
+          payload: data.data,
+        });
+      },
+    }
+  );
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const config = {
-      "Content-Type": "application/json",
-    };
-
-    const response = await API.post("/login", data, config);
-    console.log(response);
-    setAuthToken(response.data.data.token);
-    handleSignin({
-      type: "LOGIN",
-      payload: response.data.data,
-    });
+    loginUser.mutate();
   };
   return (
     <Form onSubmit={handleSubmit}>

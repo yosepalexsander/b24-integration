@@ -1,26 +1,17 @@
-import data from "../data/fakeData";
 import { Col, Row } from "react-bootstrap";
 import CardItem from "./CardItem";
 import { API } from "../config/api";
-import { useState, useEffect } from "react";
+import { useQuery } from "react-query";
 
 import not_found from "../assets/images/not_found.svg";
 const CardList = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const getProducts = async () => {
+  const { isLoading, data, error } = useQuery("products", async () => {
     const response = await API.get("/products");
-    setData(response.data.data);
-    setLoading(false);
-  };
-  useEffect(() => {
-    getProducts();
-    return () => {
-      setData(null);
-    };
-  }, []);
+    return response.data.data;
+  });
 
-  if (loading) return <p>...loading</p>;
+  if (isLoading) return <p>...loading</p>;
+  if (error) return <h1>Error occured: {error.response.data.message}</h1>;
   return (
     <Row>
       {data.length <= 0 && (
