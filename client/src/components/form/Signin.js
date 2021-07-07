@@ -21,7 +21,7 @@ const Signin = ({ handleSignin }) => {
       const config = {
         "Content-Type": "application/json",
       };
-      return await API.post("/login", JSON.stringify(data), config);
+      return await API.post("/login", data, config);
     },
     {
       onSuccess: async ({ data }) => {

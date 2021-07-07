@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { register, login } = require("../controllers/auth");
+const { register, login, checkAuth } = require("../controllers/auth");
 const {
   createProduct,
   getProducts,
@@ -21,6 +21,7 @@ const router = Router();
 
 router.post("/register", register);
 router.post("/login", login);
+router.get("/check-auth", authentication, checkAuth);
 router.post("/user", createUser);
 router.get("/users", getUsers);
 router.get("/user/:id", getUser);

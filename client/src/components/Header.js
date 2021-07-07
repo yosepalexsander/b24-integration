@@ -54,8 +54,8 @@ const Header = () => {
           <Link to="/About" className="nav-link">
             About
           </Link>
-          <Link to="/property" className="nav-link">
-            Profile
+          <Link to="/products" className="nav-link">
+            Products
           </Link>
         </Nav>
         <Form className="d-flex mr-auto">
@@ -76,7 +76,7 @@ const Header = () => {
         </Form>
         {state.isLogin && (
           <>
-            <p>{state.user.name}</p>
+            <p className="nav-link">{state.user.name}</p>
             <Button
               className="mr-3 my-2"
               variant="danger"

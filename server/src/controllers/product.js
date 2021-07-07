@@ -103,7 +103,7 @@ exports.getProduct = async (req, res) => {
 
 exports.createProduct = async (req, res) => {
   const { category: categoryName, ...productData } = req.body;
-
+  console.log(req.body);
   try {
     const product = await Product.create({
       name: productData.name,

@@ -1,15 +1,8 @@
 import { Col, Row } from "react-bootstrap";
 import CardItem from "./CardItem";
-import { API } from "../config/api";
-import { useQuery } from "react-query";
 
 import not_found from "../assets/images/not_found.svg";
-const CardList = () => {
-  const { isLoading, data, error } = useQuery("products", async () => {
-    const response = await API.get("/products");
-    return response.data.data;
-  });
-
+const CardList = ({ data, isLoading, error }) => {
   if (isLoading) return <p>...loading</p>;
   if (error) return <h1>Error occured: {error.response.data.message}</h1>;
   return (

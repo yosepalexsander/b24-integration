@@ -2,9 +2,14 @@ import { Row, Col } from "react-bootstrap";
 
 import Sidebar from "../components/Sidebar";
 import CardList from "../components/CardList";
-import hello from "../assets/images/hello.svg";
+import { API } from "../config/api";
+import { useQuery } from "react-query";
 
 const Home = () => {
+  const { isLoading, data, error } = useQuery("products", async () => {
+    const response = await API.get("/products");
+    return response.data.data;
+  });
   return (
     <div>
       <Row>
@@ -12,7 +17,7 @@ const Home = () => {
           <Sidebar />
         </Col>
         <Col>
-          <CardList />
+          <CardList data={data} isLoading={isLoading} error={error} />
         </Col>
       </Row>
     </div>
