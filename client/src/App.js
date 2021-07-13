@@ -10,6 +10,7 @@ import DetailProduct from "./pages/DetailProduct";
 import { API, setAuthToken } from "./config/api";
 import { useContext, useEffect } from "react";
 import Product from "./pages/Product";
+import { Chat } from "./pages/Chat";
 
 if (localStorage.getItem("token")) {
   setAuthToken(localStorage.getItem("token"));
@@ -54,6 +55,10 @@ const App = () => {
             <Route exact path="/about" component={About} />
             <Route exact path="/products" component={Product} />
             <PrivateRoute exact path="/product/:id" component={DetailProduct} />
+            {/* socket implementation page */}
+            <Route path="/chat">
+              <Chat />
+            </Route>
           </Switch>
         </Container>
       </Router>

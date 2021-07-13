@@ -57,6 +57,9 @@ const Header = () => {
           <Link to="/products" className="nav-link">
             Products
           </Link>
+          <Link to="/chat" className="nav-link">
+            Socket Chat
+          </Link>
         </Nav>
         <Form className="d-flex mr-auto">
           <InputGroup>
@@ -76,7 +79,7 @@ const Header = () => {
         </Form>
         {state.isLogin && (
           <>
-            <p className="nav-link">{state.user.name}</p>
+            <p className="nav-link mr-3 my-2">{state.user.name}</p>
             <Button
               className="mr-3 my-2"
               variant="danger"

@@ -5,7 +5,7 @@ import { Row, Col } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { API } from "../config/api";
 
-const DetailProduct = ({ match }) => {
+const DetailProduct = () => {
   const params = useParams();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,6 +19,7 @@ const DetailProduct = ({ match }) => {
     getProduct();
     return () => {
       setData(null);
+      setLoading(true);
     };
   }, []);
 
@@ -26,21 +27,14 @@ const DetailProduct = ({ match }) => {
   return (
     <Row>
       <Col xs={6}>
-        <img src={data.image} alt="product" className="img-fluid" />
+        <img src={data?.image} alt="product" className="img-fluid" />
       </Col>
       <Col>
-        <Row>
-          <p>{data.name}</p>
-        </Row>
-        <Row>
-          <p>price: </p>
-          <p>{data.price}</p>
-        </Row>
-        <Row>
-          <p>description: </p>
-          <br />
-          <p>{data.description}</p>
-        </Row>
+        <p>{data?.name}</p>
+        <p>price: </p>
+        <p>{data?.price}</p>
+        <p>description: </p>
+        <p>{data?.description}</p>
       </Col>
     </Row>
   );
