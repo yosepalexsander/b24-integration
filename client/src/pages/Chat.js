@@ -11,7 +11,6 @@ export const Chat = () => {
   const loadMessages = () => {
     socket.on("messages", (data) => {
       setMessages(data);
-      console.log(messages);
       const chatMessagesElm = document.getElementById("chat-messages");
       chatMessagesElm.scrollTop = chatMessagesElm.scrollHeight;
     });
